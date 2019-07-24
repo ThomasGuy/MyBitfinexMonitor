@@ -24,6 +24,9 @@ def wsbfx(bfx, frame, WalletEvent, *args, **kwargs):
 
     @bfx.ws.on('wallet_snapshot')
     async def log_snapshot(wallets):
+        # if len(wallets) == 0:
+        #     log.info(f'You have nothing in your Bitfinex wallet')
+        # else:
         for wallet in wallets:
             if wallet.type == 'exchange' and wallet.currency not in ['SPK', 'USD']:  # No small balances
                 myWallet[wallet.currency] = wallet.balance
@@ -47,8 +50,10 @@ def wsbfx(bfx, frame, WalletEvent, *args, **kwargs):
         coin = sub.symbol[1:4]
         mySubscribed[sub.chan_id] = coin
         log.info(f"{coin} is subscribed  - id:- {sub.chan_id}")
-        tickerDict[coin] = TickerData(symbol=sub.symbol, channel_name=sub.channel_name,
-                                      chan_id=sub.chan_id, sub_id=sub.sub_id,
+        tickerDict[coin] = TickerData(symbol=sub.symbol,
+                                      channel_name=sub.channel_name,
+                                      chan_id=sub.chan_id,
+                                      sub_id=sub.sub_id,
                                       balance=myWallet[coin])
         log.info(f"tickerDict: {tickerDict[coin]}")
         # bfx.ws._emit('on_update_tickerData', (coin))
