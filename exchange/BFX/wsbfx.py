@@ -58,7 +58,7 @@ def wsbfx(bfx, frame, WalletEvent, *args, **kwargs):
 
     @bfx.ws.on('unsubscribed')
     async def log_unsubscribe(sub):
-        log.info(f"unsubscribed: {sub}")
+        log.info(f"unsubscribed: {sub.symbol}")
         del(tickerDict[sub.symbol[1:4]])
 
     @bfx.ws.on('error')
