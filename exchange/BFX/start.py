@@ -1,9 +1,8 @@
 import asyncio
 import os
-from wxasync import WxAsyncApp
+
 # package imports
-from .BFX import wsbfx, Client, CustomLogger
-from .wx_gui import WalletFrame, WalletEvent
+from . import wsbfx, Client, CustomLogger
 
 
 log = CustomLogger('start', 'DEBUG')
@@ -23,16 +22,10 @@ class AuthError(Exception):
 def main_async():
     try:
         loop = asyncio.events.get_event_loop()
-        bfx = Client(API_KEY=api_key, API_SECRET=api_secret, loop=loop)
-        app = WxAsyncApp(loop=loop)
-        frame = WalletFrame()
-        frame.Show()
-        app.SetTopWindow(frame)
+        bfx = Client(API_KEY=api_key, API_SECRET=api_secret)
         tasks = [
             asyncio.ensure_future(bfx.ws.get_task_executable()),
-            asyncio.ensure_future(app.MainLoop()),
         ]
-        wsbfx(bfx, frame, WalletEvent)
         loop.run_until_complete(asyncio.wait(tasks))
     except AuthError as err:
         log.error(err)

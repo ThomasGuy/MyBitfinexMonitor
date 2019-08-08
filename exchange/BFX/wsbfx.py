@@ -1,6 +1,5 @@
 """Open bitfinex websockets with authorisation get my wallet and show balance"""
 import asyncio
-import wx
 
 from . import CustomLogger
 from .tickerdata import TickerData
@@ -20,7 +19,7 @@ tickerDataFields = ['bid', 'bid_size', 'ask', 'ask_size', 'daily_change',
                     'daily_change_freq', 'last_price', 'volume', 'high', 'low']
 
 
-def wsbfx(bfx, frame, WalletEvent, *args, **kwargs):
+def wsbfx(bfx, *args, **kwargs):
 
     @bfx.ws.on('wallet_snapshot')
     async def log_snapshot(wallets):

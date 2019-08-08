@@ -1,10 +1,12 @@
-from BfxApi.bfxapi import Client
-from BfxApi.bfxapi import (Order, Trade, OrderBook, Subscription, Wallet,
-                           Position, FundingLoan, FundingOffer, FundingCredit)
-from BfxApi.bfxapi.websockets.GenericWebsocket import GenericWebsocket
-from BfxApi.bfxapi.websockets.BfxWebsocket import BfxWebsocket
-from BfxApi.bfxapi.utils.Decimal import Decimal
-from BfxApi.bfxapi.utils.CustomLogger import CustomLogger
+from bfxapi import Client
+from bfxapi import (Order, Trade, OrderBook, Subscription, Wallet,
+                    Position, FundingLoan, FundingOffer, FundingCredit)
+
+from bfxapi.websockets.generic_websocket import GenericWebsocket
+
+from bfxapi.websockets.bfx_websocket import BfxWebsocket
+from bfxapi.utils.decimal import Decimal
+from bfxapi.utils.custom_logger import CustomLogger
 
 from .wsbfx import tickerDict, wsbfx
 

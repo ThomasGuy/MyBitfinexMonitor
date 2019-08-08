@@ -1,4 +1,4 @@
-from exchange import main_async
+from exchange.BFX.start import main_async
 
 
 if __name__ == '__main__':
